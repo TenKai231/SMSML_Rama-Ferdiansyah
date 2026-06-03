@@ -9,16 +9,21 @@ import warnings
 import sys
 
 if __name__ == "__main__":
+    import os
+    os.environ["MLFLOW_ALLOW_FILE_STORE"] = "true"
+
     warnings.filterwarnings("ignore")
     np.random.seed(40)
 
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+
     # Pastikan tracking URI ke lokal jika tidak ingin pakai server port 5000
-    mlflow.set_tracking_uri("file://" + os.path.abspath("mlruns"))
+    mlflow.set_tracking_uri("file://" + os.path.join(current_dir, "mlruns"))
     mlflow.set_experiment("Latihan Credit Scoring")
     mlflow.autolog()
 
-    # Ambil file path dari argument atau default ke train_pca.csv
-    file_path = sys.argv[3] if len(sys.argv) > 3 else os.path.join(os.path.dirname(os.path.abspath(__file__)), "train_pca.csv")
+    # Ambil file path dari argument atau default ke dataset_clean.csv
+    file_path = sys.argv[3] if len(sys.argv) > 3 else os.path.join(current_dir, "dataset_clean.csv")
 
     if not os.path.exists(file_path):
         print(f"Error: File {file_path} tidak ditemukan!")
