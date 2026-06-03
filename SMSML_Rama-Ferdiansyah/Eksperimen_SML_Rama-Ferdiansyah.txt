@@ -1,0 +1,6 @@
+Tautan Repositori GitHub untuk Kriteria 1 (Eksperimen Data):
+https://github.com/TenKai231/SMSML_Rama-Ferdiansyah/tree/main/Eksperimen_SML_Rama
+
+Deskripsi:
+Eksperimen ini dilakukan menggunakan template resmi MSML, mencakup tahap Perkenalan Dataset, EDA, hingga Preprocessing (Scaling dan Encoding) yang menghasilkan dataset bersih untuk tahap pemodelan.
+

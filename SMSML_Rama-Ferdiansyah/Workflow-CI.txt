@@ -1,0 +1,12 @@
+Tautan Repositori GitHub TERPISAH untuk Kriteria 3 (Workflow CI):
+https://github.com/TenKai231/Workflow-CI
+
+Struktur Repo:
+- .github/workflows/ci.yml (Konfigurasi GitHub Actions)
+- MLProject/ (Direktori Project MLflow)
+  - MLproject (File Deskripsi Project)
+  - conda.yaml (Environment Dependencies)
+  - modelling.py (Script Pelatihan Model)
+  - dataset_preprocessing.csv (Dataset hasil pembersihan)
+
+Status: Repositori ini bersifat Public dan Workflow CI telah berjalan dengan sukses (centang hijau).

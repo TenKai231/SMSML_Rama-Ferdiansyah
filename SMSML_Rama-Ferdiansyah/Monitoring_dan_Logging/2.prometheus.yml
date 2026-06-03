@@ -1,0 +1,15 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+# File rule untuk alerting
+rule_files:
+  - "alert_rules.yml"
+
+scrape_configs:
+  - job_name: "ml_model"
+    static_configs:
+      # Karena kita akan pakai Docker, ganti localhost dengan host.docker.internal (Windows/Mac)
+      # atau IP mesin host pada Linux, atau bisa juga nama servicenya jika dibuat di docker-compose.
+      # Untuk mempermudah saat prometheus dijalankan dalam docker dan inference.py di host lokal:
+      - targets: ["host.docker.internal:8000"]
