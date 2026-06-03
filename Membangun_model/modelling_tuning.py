@@ -4,15 +4,21 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 import numpy as np
 import os
+os.environ["MLFLOW_ALLOW_FILE_STORE"] = "true"
+
+# Dapatkan path dinamis ke folder tempat skrip ini berada
+current_dir = os.path.dirname(os.path.abspath(__file__))
 
 # Set tracking URI ke local directory agar tidak perlu menjalankan server terpisah
-tracking_uri = "file://" + os.path.abspath("mlruns")
+tracking_uri = "file://" + os.path.join(current_dir, "mlruns")
 mlflow.set_tracking_uri(tracking_uri)
 
 # Create a new MLflow Experiment
 mlflow.set_experiment("Latihan Credit Scoring Optimization")
 
-data = pd.read_csv("train_pca.csv")
+# Path dinamis ke dataset
+data_path = os.path.join(current_dir, "dataset_clean.csv")
+data = pd.read_csv(data_path)
 
 X_train, X_test, y_train, y_test = train_test_split(
     data.drop("Credit_Score", axis=1),

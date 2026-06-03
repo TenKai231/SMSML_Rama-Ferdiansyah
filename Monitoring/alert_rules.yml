@@ -1,0 +1,32 @@
+groups:
+  - name: ML_Model_Alerts
+    rules:
+      # Alert: Jika error rate terlalu tinggi (lebih dari 10% request gagal dalam 1 menit)
+      - alert: HighErrorRate
+        expr: rate(model_error_count_total[1m]) / rate(model_request_count_total[1m]) > 0.1
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Error rate model tinggi"
+          description: "Model ML mengalami error rate lebih dari 10% dalam 1 menit terakhir."
+
+      # Alert: Jika latency/kecepatan prediksi melambat secara signifikan
+      - alert: HighLatency
+        expr: rate(model_prediction_latency_seconds_sum[1m]) / rate(model_prediction_latency_seconds_count[1m]) > 1.0
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Latency model lambat"
+          description: "Rata-rata waktu prediksi membutuhkan lebih dari 1 detik."
+
+      # Alert: Jika CPU usage lebih dari 80%
+      - alert: HighCpuUsage
+        expr: system_cpu_usage_percent > 80
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Penggunaan CPU tinggi"
+          description: "CPU host mencapai {{ $value }}%."
